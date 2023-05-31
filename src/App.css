@@ -1,0 +1,1789 @@
+/* ---------------------------------- Variables --------------------------------- */
+:root {
+    --bg: white;
+    --bg-accent: #fcf9f9;
+    --primary-col: rgb(68, 67, 67);
+    --text-color: black;
+    --hover-bg: rgb(2, 2, 36);
+    --hover-color: whitesmoke;
+    --toggle-bg: gray;
+}
+
+.dark-theme {
+    --bg: #010116;
+    --bg-accent: rgb(0, 0, 12);
+    --primary-col: #dadce1;
+    --text-color: white;
+    --toggle-bg: black;
+}
+
+
+/* ------------------------------ General Styles ------------------------------ */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text-color);
+    overflow-x: hidden;
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+li a:hover {
+    text-decoration: underline;
+}
+
+.main-element {
+    min-height: 100vh;
+}
+
+@media screen and (max-width: 500px) {
+    h1, h2, h3, h4, h5 {
+        font-size: 16px;
+    }
+}
+
+.before_header {
+    position: relative;
+}
+
+/*  -------------------------------- Header Page ------------------------------- */
+header {
+    height: 70px;
+    background-color: var(--bg-accent);
+    color: var(--text-color);
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    position: sticky;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.175);
+    z-index: 10;
+    transition: all 0.3s linear;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sign-in-button {
+    display: none;
+}
+
+.sign-in-button:hover {
+    background-color: rgb(4, 4, 109);
+}
+
+@media screen and (min-width: 640px) {
+    .sign-in-button {
+        background-color: rgb(6, 6, 173);
+        display: block;
+        margin-left: 0;
+        margin-right: 9rem;
+    }
+
+    .header {
+        padding-right: 2rem;
+    }
+}
+
+.header-title {
+    font-size: 22px;
+}
+
+.header-nav {
+    display: none;
+    transition: all 0.5s linear;
+}
+
+.before_header_mobile {
+    display: none;
+}
+
+@media screen and (max-width: 640px) {
+    .before_header_mobile {
+        background-color: rgb(77, 75, 75);
+        color: #fcf9f9;
+        display: flex;
+    }
+
+    .hide-nav {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        font-size: 22px;
+        align-items: flex-start;
+        padding: 3rem 2rem;
+        z-index: 10;
+        transition: all 0.3s linear;
+    }
+
+    .mobile-nav {
+        position: relative;
+        left: -300px;
+    }
+    
+    .mobile-nav li {
+        position: absolute;
+        color: var(--text-color);
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 0;
+    }
+    
+    .mobile-nav li:first-child {
+        margin-top: 2rem;
+    }
+    
+    .mobile-nav-host {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        cursor: pointer;
+    }
+    
+    .mobile-nav-host span {
+        font-size: 2rem;
+    }
+    
+    .mobile-nav-children {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        padding: 0 1rem;
+        margin-top: -0.5rem;
+        font-size: 16px;
+        transition: all 0.3s linear;
+    }
+    
+    .mobile-nav-children li a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+    
+    }
+    
+    .mobile-nav-children li a:hover {
+        color: #cecccc;
+    }
+}
+
+
+/*  --------------------------------- Hamburger Menu ---------------------------- */
+#menu-button {
+    background-color: transparent;
+    height: 31px;
+    width: 31px;
+    position: relative;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
+    width: 30px;
+    height: 3px;
+    background-color: var(--text-color);
+    position: absolute;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+    content: "";
+}
+
+.menu-icon::before {
+    transform: translate(-15px, 7px);
+}
+
+.menu-icon::after {
+    transform: translate(-15px, -7px);
+}
+
+.show .menu-icon {
+    background-color: transparent;
+}
+
+.show .menu-icon::before {
+    transform: translate(-15px) rotate(-45deg);
+}
+
+.show .menu-icon::after {
+    transform: translate(-15px) rotate(45deg);
+}
+
+/* ----------------------------------- Theme toggler -------------------------- */
+.theme-toggler {
+    background: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.6rem;
+    width: 4.2rem;
+    cursor: pointer;
+    border-radius: 10px;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+}
+
+.theme-toggler span {
+    font-size: 1.2rem;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg-accent);
+}
+
+.theme-toggler span.active {
+    background: var(--toggle-bg);
+    color: var(--text-color);
+    border-radius: 5px;
+}
+
+
+/* --------------------------- Media Query for Navbar -------------------------- */
+@media screen and (min-width: 640px) {
+    header {
+        width: 100%;
+        font-size: 22px;
+    }
+
+    #menu-button {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: none;
+    }
+
+    .header-nav {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+        margin-left: auto;
+    }
+}
+
+/* ------------------------------ Home Page ----------------------------------- */
+.home-container {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 6rem;
+}
+
+.home-img {
+    background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.4) 100%),
+        url(./assets/home-hero.png) no-repeat center;
+    background-size: cover;
+    margin: 0 auto 0 auto;
+    padding: 3rem;
+    border-radius: 5px;
+    font-size: 19px;
+    display: block;
+    color: var(--primary-col);
+    width: 85%;
+    max-width: 95%;
+}
+
+.home-img h1 {
+    font-size: 28px;
+    margin-bottom: 1rem;
+}
+
+.home-img h1,
+p {
+    max-width: 85%;
+    margin-right: auto;
+    color: var(--bg-accent);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.find-vans {
+    background-color: var(--bg-accent);
+    font-size: 16px;
+    margin: 2rem 0;
+    padding: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    color: var(--text-color);
+    width: fit-content;
+}
+
+.find-vans:hover {
+    background-color: var(--hover-bg);
+    color: var(--hover-color);
+    transition: all 0.3s linear;
+}
+
+@media screen and (max-width: 640px) {
+    .home-container {
+        padding-top: 3.5rem;
+    }
+
+    .home-img {
+        display: block;
+        width: 90%;
+        margin: 2rem auto;
+        padding: 1.5rem;
+    }
+
+    .home-img h1, p {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+/* -------------------------------- Host Dashboard Page ------------------------- */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    margin-top: 3rem;
+}
+
+.dashboard-earnings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 85%;
+    margin: 0 auto;
+    padding: 4rem 0 2rem 0;
+}
+
+.dashboard-earnings nav {
+    margin-top: -2rem;
+}
+
+.info h1 {
+    font-size: 32px;
+    margin-bottom: 0.5rem;
+}
+
+.info .price {
+    font-size: 44px;
+    margin: 0.25rem 0;
+}
+
+.info span .days {
+    text-decoration: underline;
+}
+
+.dashboard-earnings nav a,
+.first-review nav a {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 1rem;
+}
+
+.first-review {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 85%;
+    margin: 6rem auto;
+    padding: 0 0.5rem;
+}
+
+.first-review .first-review-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.first-review .first-review-info h1 {
+    font-size: 32px;
+}
+
+.first-review-info div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: -0.75rem;
+    margin-right: auto;
+}
+
+.first-review-info span {
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.listed-vans-title {
+    max-width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4rem auto 0 auto;
+}
+
+.listed-vans-title h1 {
+    font-size: 32px;
+}
+
+.listed-vans-title a {
+    margin-right: 2rem;
+}
+
+.dashboard .dashboard-vans {
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.van-list {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 4rem auto;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title h1 {
+    font-size: 32px;
+}
+
+@media screen and (max-width: 500px) {
+    .dashboard-earnings {
+        width: 100%;
+        margin: 0 auto;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .dashboard-earnings .info h1, .dashboard-earnings .info p {
+        font-size: 19px;
+    }
+
+    .dashboard-earnings .info span {
+        font-size: 12px;
+    }
+
+    .dashboard-earnings .progress {
+        display: none;
+    }
+
+    .dashboard .dashboard-earnings nav {
+        margin-top: 0;
+        font-size: 12px;
+    }
+
+    .first-review nav ul li a, 
+    .first-review-info p, 
+    .first-review-info p span {
+        font-size: 12px;
+    }
+
+    .first-review .first-review-info {
+        flex-direction: column;
+    }
+
+    .first-review .first-review-info .star {
+        font-size: 12px;
+    }
+
+    .first-review .first-review-info h1 {
+        font-size: 16px;
+    }
+
+    .listed-vans-title h1 {
+        font-size: 16px;
+    }
+
+    .listed-vans-title a {
+        margin: 0;
+        font-size: 12px;
+    }
+}
+
+
+/*  -------------- Host Dashboard Page - Circle ------------------- */
+.dashboard-child .dashboard-earnings .progress {
+    position: relative;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+}
+
+.dashboard-child .dashboard-earnings svg {
+    width: 7rem;
+    height: 7rem;
+}
+
+.dashboard-child .dashboard-earnings svg circle {
+    fill: rgb(11, 11, 122);
+    stroke: #ff4500;
+    stroke-width: 9;
+    stroke-linecap: round;
+    transform: translate(5px, 5px); 
+    stroke-dasharray: 110;
+    stroke-dashoffset: 92;
+}
+
+.dashboard-child .dashboard-earnings .sales svg circle {
+    stroke-dashoffset: -30;
+    stroke-dasharray: 200;
+}
+
+
+.dashboard-child .dashboard-earnings .progress .number {
+    position: absolute;
+    top: 0;
+    left: 30%;
+    height: 100%;
+    overflow-x: 0;
+    width: 100%;
+    font-size: 19px;
+    display: flex;
+    color: black;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.dashboard-child .dashboard-earnings small {
+    display: block;
+    margin-top: 1.6rem;
+}
+
+
+/* --------------------------------- Host Income Page ------------------------ */
+.income-container {
+    width: 100%;
+    min-height: 100vh;
+    margin: 62px 0 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.income-container-child {
+    width: 100%;
+    margin: 2rem auto;
+}
+
+.income {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 1.5rem;
+}
+
+.income-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.income p span {
+    text-decoration: underline;
+}
+
+.income .price,
+.income .income-info h1 {
+    font-size: 2rem;
+}
+
+.income-info-h1-p {
+    display: flex;
+    flex-direction: column;
+}
+
+.income-info-h1-p p {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+}
+
+.income img {
+    width: 50%;
+    margin: 4rem auto;
+    background-color: var(--bg);
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.income-list {
+    width: 100%;
+    margin: 42px 0;
+}
+
+.income-list-title {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.income-list-title h2 {
+    font-size: 28px;
+}
+
+.income-list-title div p {
+    display: inline;
+}
+
+.income-list div p span {
+    text-decoration: underline;
+    margin-left: 0.15rem;
+}
+
+.transaction-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem auto;
+    color: var(--text-color);
+}
+
+.box {
+    width: 100%;
+    height: fit-content;
+    border-radius: 5px;
+    background-color: var(--bg);
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 1.5rem;
+    margin: 1rem auto 0 auto;
+}
+
+.box h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+
+@media screen and (max-width: 640px) {
+    .income .price,
+    .income .income-info h1 {
+        font-size: 16px;
+    }
+    
+    .income img {
+        display: block;
+        margin: 2rem auto;
+        width: 100%;
+    }
+
+    .income-list-title {
+        width: 90%;
+    }
+
+    .income-list-title h2 {
+        font-size: 16px;
+    }
+
+    .income-list-title div p {
+        font-size: 12px;
+    }
+
+    .transaction-container {
+        width: 90%;
+    }
+}
+
+
+/* ------------------------ Host Vans Page -----------------------------*/
+.host {
+    min-height: 100vh;
+    width: 100%;
+}
+
+.host .host-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 26px;
+    margin-left: 3rem;
+    padding-top: 4rem;
+}
+
+.host .host-nav ul li a {
+    margin-bottom: 2rem;
+}
+
+.star {
+    color: orange;
+    font-size: 24px
+}
+
+.back-button {
+    display: flex;
+    font-size: 19px;
+    margin-top: 2rem;
+}
+
+.host-van-list {
+    width: 95%;
+    min-height: 100vh;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.host-van-list section {
+    margin: 0 auto;
+}
+
+.host-van-title {
+    font-size: 40px;
+    width: 100%;
+    margin: 2rem auto;
+}
+
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background-color: var(--bg);
+    color: var(--text-color);
+    margin: 3rem auto;
+    border-radius: 5px;
+    gap: 16px;
+    width: 90%;
+}
+
+.details div a {
+    font-size: 19px;
+}
+
+.details div a:hover {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.details-van-info div img {
+    border-radius: 5px;
+    width: 400px;
+}
+
+.details-van-info {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+}
+
+.details-van-info div h1 {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.details-van-info div p {
+    color: var(--text-color);
+    display: block;
+}
+
+.details-van-info div p span {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+@media screen and (max-width: 640px) {
+    .host .host-nav {
+        justify-content: flex-start;
+        padding: 3rem 1rem 0 1rem;
+        margin: 0;
+        gap: 12px;
+        font-size: 12px;
+    }
+
+    .details {
+        width: 100%;
+    }
+
+    .host-van-title {
+        font-size: 19px;
+    }
+}
+
+
+/* ------------------ HostVanDetail Page ----------------------------- */
+.host-van-detail-page {
+    width: 100%;
+    min-height: 100vh;
+    margin: 3rem  auto 0 auto;
+    padding: 2.5rem 0 0 4.5rem;
+}
+
+.host-van-detail-container {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    gap: 22px;
+}
+
+.host-van-detail-container img {
+    width: 300px;
+    border-radius: 5px;
+}
+
+.host-van-detail-nav {
+    margin: 3rem 0 2rem 0;
+}
+
+.host-van-detail-nav {
+    display: flex;
+    margin: 5.5rem auto;
+    gap: 32px;
+}
+
+.host-van-detail-nav a:hover {
+    text-decoration: underline;
+}
+
+.host-van-detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding-right: 2rem;
+}
+
+.host-van-detail-info h1 {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.host-van-detail-info p {
+    font-size: 19px;
+    margin-top: -1rem;
+    display: block;
+}
+
+.host-van-detail-info p span {
+    font-size: 28px;
+}
+
+.pricing {
+    display: block;
+    font-size: 1rem;
+}
+
+.pricing span {
+    font-size: 2.5rem;
+}
+
+.HostVanPricing-page, .hostVanPhotos-page {
+    height: 100vh;
+}
+
+.hostVanPhotos-page .photos {
+    width: 300px;
+    border-radius: 5px;
+}
+
+.host-van-info-page {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 80%;
+    padding: 0 0 3rem 0;
+}
+
+.host-van-info-page p {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.host-van-info-page p:nth-child(3) {
+    display: block;
+}
+
+.host-van-info-page p span {
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.host-van-detail-back-button {
+    display: block;
+    width: fit-content;
+    margin-bottom: 3rem;
+}
+
+@media screen and (max-width: 640px) {
+    .host-van-detail-page {
+        width: 100%;
+        padding: 1rem 0.75rem;
+    }
+
+    .host-van-detail-container {
+        height: 100vh;
+        width: 100%;
+        margin: 0 auto;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .host-van-detail-nav {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 16px;
+        gap: 16px;
+        margin: -3rem 0 3rem 0;
+    }
+
+    .details {
+        width: fit-content;
+        margin: 2rem auto;
+    }
+
+    .details-van-info {
+        gap: 14px;
+    }
+
+    .details div a {
+        font-size: 14px;
+    }
+
+    .details .details-van-info div img {
+        width: 170px;
+    }
+
+    .details-van-info div h1 {
+        font-size: 16px;
+    }
+
+    .details-van-info div p span {
+        font-size: 16px;
+    }
+
+    .host-van-info-page {
+        height: 100vh;
+    }
+}
+
+
+/* ---------------------- The Host Review Page ------------------------ */
+.review-parent-container {
+    min-height: 100vh;
+}
+
+.review-page {
+    width: 100%;
+    margin: 2rem auto 0 auto;
+    padding: 2rem 1rem 4rem 1rem;
+}
+
+.review-title {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem auto 0 auto;
+
+}
+
+.review-title h1 {
+    font-size: 32px;
+}
+
+
+.review-title p span {
+    text-decoration: underline;
+    margin-left: 0.25rem;
+}
+
+.review-page img {
+    background-color: var(--bg);
+    margin: 3rem auto 0 auto;
+    padding: 2rem;
+    border-radius: 5px;
+    width: 60%;
+    display: block;
+}
+
+.review-rating-container {
+    width: 100%;
+    margin: 0;
+}
+
+.review-rating {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 24px;
+    padding: 4rem 2rem;;
+}
+
+.review-rating h1 {
+    font-size: 24px;
+}
+
+.review-data {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.review-data .rating-icon {
+    display: flex;
+    gap: 7px;
+    width: 16px;
+}
+
+.review-data-info p {
+    font-size: 19px;
+    padding-bottom: 0.5rem;
+}
+
+.review-data-info p:first-of-type span {
+    font-size: 14px;
+}
+
+.review-data-info .review-data-info-text {
+    max-width: 800px;
+}
+
+.review-data-info .name-date span {
+    color: var(--text-color);
+    margin-left: 0.75rem;
+}
+
+
+@media screen and (max-width: 700px) {
+    .review-page {
+        padding: 1rem 1rem 4rem 1rem;
+    }
+
+    .review-title {
+        width: 100%;
+    }
+
+    .review-title h1 {
+        font-size: 16px;
+    }
+
+    .review-title p {
+        font-size: 12px;
+    }
+
+    .review-page img {
+        width: 100%;
+        margin: 1.5rem auto 0 auto;
+        padding: 1rem;
+    }
+
+    .review-rating {
+        min-height: 100vh;
+        padding: 2rem 0.75rem 6rem 0.75rem;
+    }
+
+    .review-data .rating-icon {
+        width: 19px;
+    }
+}
+
+
+/* ----------------------------------- About Page ------------------------------ */
+.about-page {
+    margin: 0 auto;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.about-page .about-page-child {
+    padding: 2rem 0;
+}
+
+.about-page img {
+    display: block;
+    width: 80%;
+    max-width: 85%;
+    height: auto;
+    margin: 75px auto 2rem auto;
+    border-radius: 5px;
+}
+
+.about-page-hero {
+    height: 100vh;
+    width: 95%;
+    max-width: 95%;
+    padding-top: 2rem;
+}
+
+.about-page-hero .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+    height: 100vh;
+}
+
+.about-page-hero .green-van {
+    width: 300px;
+    display: block;
+}
+
+.about-page-hero .hero .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+}
+
+.hero .info h1 {
+    width: 65%;
+    line-height: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.hero .info p {
+    width: 65%;
+    margin: 0 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.desc {
+    background-color: var(--hover-bg);
+    font-size: 22px;
+    width: 85%;
+    margin: 4rem auto 0 auto;
+    border-radius: 5px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.desc div p {
+    margin-bottom: 0.5rem;
+}
+
+.desc a {
+    margin-top: 1.5rem;
+    background-color: var(--bg);
+    color: var(--text-color);
+    font-weight: normal;
+    width: fit-content;
+    padding: 0.65rem 1.5rem;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.desc a:hover {
+    transform: scale(1.01);
+
+}
+
+@media screen and (max-width: 640px) {
+    .about-page-hero .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .about-page img {
+        display: block;
+        width: 95%;
+        margin: 0.5rem auto 1rem auto;
+        padding-bottom: 4rem;
+    }
+
+    .about-page-hero {
+        height: 100vh;
+    }
+
+    .about-page-hero .hero .info {
+        width: 600px;
+        margin-top: 2rem;
+    }
+
+    .about-page-hero .hero .info h1 {
+        font-size: 26px;
+        width: 95%;
+        max-width: 100%;
+        line-height: normal;
+    }
+
+    .about-page-hero .hero .info p {
+        width: 95%;
+    }
+
+    .about-page-hero .green-van {
+        margin: 0.5rem auto 5rem auto;
+        display: block;
+    }
+
+    .desc a {
+        font-size: 16px;
+    }
+}
+
+/* ----------------------------------- Van Page -----------------------------  */
+#van-page-container {
+    min-height: 100vh;
+}
+
+.van-page {
+    width: 100%;
+    padding: 4rem;
+}
+
+.van-page h1 {
+    font-size: 32px;
+    margin-bottom: 1rem;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+}
+
+button {
+    background-color: rgb(4, 4, 75);
+    color: var(--hover-color);
+    width: fit-content;
+    padding: 0.25rem 1rem;
+    font-size: 19px;
+    border-radius: 5px;
+    transition: all 0.3s linear;
+}
+
+.clear-button:hover {
+    background-color: rgb(3, 3, 44);
+    color: var(--hover-color);
+}
+
+.van-type.simple:hover,
+.van-type.simple.selected {
+    background-color: #E17654;
+    color: white;
+}
+
+.van-type.luxury:hover,
+.van-type.luxury.selected {
+    background-color: #115E59;
+    color: white;
+}
+
+.van-type.rugged:hover,
+.van-type.rugged.selected {
+    background-color: rgb(6, 78, 6);
+    color: white;
+}
+
+.van-page-container {
+    padding: 3rem 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 62px;
+}
+
+.inner-container {
+    background-color: rgb(236, 232, 232);
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 2rem;
+    border-radius: 10px;
+    width: fit-content;
+    height: auto;
+}
+
+.inner-container div h2 {
+    font-size: 28px;
+    margin: 0.75rem auto;
+    color: var(--text-color);
+}
+
+.inner-container p {
+    font-size: 19px;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+}
+
+i {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 19px;
+    width: fit-content;
+}
+
+.van-image {
+    border-radius: 5px;
+    width: 400px;
+}
+
+@media screen and (max-width: 640px) {
+    .van-page {
+        padding: 3rem 1.5rem;
+        width: 95%;
+        max-width: 100%;
+    }
+    .van-page h1 {
+        font-size: 16px;
+    }
+
+    .buttons {
+        gap: 9px;
+        width: 95%;
+    }
+
+    button {
+        font-size: 13px;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .van-page-container {
+        padding: 1rem 0 4rem 0;
+    }
+
+    .container {
+        gap: 26px;
+    }
+
+    .inner-container {
+        width: 90%;
+        max-width: 95%;
+        margin: 0 auto;
+    }
+}
+
+
+/* ------------------ Vans Page - Vandetail Page ------- */
+
+.vandetail-page {
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.vandetail-page .vandetail-back-button {
+    display: block;
+    width: fit-content;
+    margin: 1rem 0 3rem 0;
+}
+
+.van-detail {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 22px;
+    padding: 1rem 2rem;
+    margin: 0 auto;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.van-detail .van-image {
+    width: 500px;
+}
+
+.van-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.van-info h1 {
+    font-size: 32px;
+}
+
+.van-detail-img-des {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 42px;
+}
+
+.van-detail-img-des .van-info-des {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 26px;
+}
+
+
+.van-info button {
+    width: 100%;
+    background-color: #E17654;
+    color: white;
+    font-size: 22px;
+}
+
+.rent-van {
+    background-color: rgb(8, 8, 87);
+    color: white;
+    display: block;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin: 2rem auto;
+    font-size: 26px;
+
+}
+
+.rent-van:hover {
+    background-color: rgb(5, 5, 66);
+}
+
+@media screen and (max-width: 700px) {
+    .vandetail-page {
+        padding: 2rem 0.5rem;
+    }
+
+    .van-detail {
+        padding: 1rem 0.5rem;
+    }
+
+    .van-info h1 {
+        font-size: 22px;
+    }
+
+    .van-detail-img-des {
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    .van-detail-img-des .van-info-des {
+        font-size: 16px;
+        margin-right: auto;
+        margin-bottom: 1rem;
+    }
+
+}
+
+/* ----------------------- Footer Page ----------------------- */
+footer {
+    width: 100%;
+    background-color: var(--text-color);
+    color: var(--text-color);
+    padding: 0.75rem 0.25rem;
+}
+
+.footer {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+footer .footer p {
+   display: flex;
+   text-align: center;
+   justify-content: center;
+   flex-wrap: wrap;
+   padding: 0.25rem 0;
+   margin: 0 auto;
+}
+
+footer .footer p span {
+    margin-right: 1rem;
+}
+
+.footer .developer {
+    color: rgb(175, 173, 173);
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 640px) {
+    footer {
+        padding: 0.25rem;
+    }
+
+    .footer {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .footer p {
+        padding: 0.25rem;
+    }
+}
+
+
+
+/* --------------------------- Notfound Page ---------------------------- */
+.not-found-page {
+    margin: 0 auto;
+    background-color: var(--bg);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    flex-wrap: wrap;
+    font-size: 24px;
+    overflow-x: hidden;
+}
+
+.not-found-page .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.not-found-page .content span {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+
+/* -------------------------- Error Page ------------------------------- */
+.error-page {
+    display: grid;
+    place-content: center;
+    margin: 0 auto;
+    overflow-wrap: break-word;
+    min-height: 100vh;
+}
+
+.error-link {
+    background-color: var(--toggle-bg);
+    color: var(--hover-color);
+    width: fit-content;
+    padding: 0.5rem 2rem;
+    text-align: center;
+    margin: 1.5rem auto;
+    border-radius: 5px;
+}
+
+.error-link:hover {
+    background-color: rgb(88, 87, 87);
+}
+
+
+/* -------------------------------- Suspense Page --------------------------- */
+.suspense {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+/* ------------------------- Sign In Page --------------------------- */
+.sign_in_page {
+    min-height: 100vh;
+    width: 100%;
+    padding: 2rem 2rem 2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign_in_page form {
+    width: 65%;
+    margin: 4rem auto 0 auto;
+    padding: 12px 32px;
+    height: 400px;
+    max-height: 500px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.sign_in_page form h1 {
+    text-align: center;
+    font-size: 22px;
+    margin: 12px 0;
+}
+
+.sign_in_page form .input-fields {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sign_in_page form .input-fields label {
+    position: absolute;
+    left: -1000px;
+}
+
+.sign_in_page form .input-fields input {
+    width: 100%;
+    margin-top: 0.25rem;
+    border-radius: 5px;
+    padding: 0.75rem 0.5rem;
+    border: 1px solid gray;
+}
+
+.sign_in_page form button {
+    margin: 1.5rem auto 0 auto;
+    width: 100%;
+    background-color: #E17654;
+}
+
+.sign_in_page form .new-user p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 1rem auto 0 auto;
+}
+
+@media screen and (max-width: 640px) {
+    .sign_in_page {
+        padding: 1rem;
+    }
+
+    .sign_in_page form {
+        width: 100%;
+        padding: 12px;
+        height: 400px;
+        max-width: 450px;
+    }
+
+    .sign_in_page form h1 {
+        font-size: 16px;
+    }
+
+    .sign_in_page form .new-user p {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .sign_in_page form {
+        width: 450px;
+    }
+}
+
+
+/* ----------------------- Sign up Page --------------------------- */
+.sign_up_page {
+    min-height: 100vh;
+    width: 100%;
+    padding: 2rem;
+}
+
+.sign_up_page .sign-up-form {
+    width: 100%;
+    margin: 7rem auto;
+    padding: 6rem 32px;
+    height: 450px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.sign_up_page .sign-up-form .sign-up-h2 {
+    color: var(--text-color);
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 600px) {
+    .sign_up_page .sign-up-form {
+        width: 450px;
+        padding: 3rem 32px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .sign_up_page {
+        padding: 1rem;
+    }
+
+    .sign_up_page .sign-up-form {
+        width: 100%;
+        height: fit-content;
+        padding: 1rem;
+    }
+}
+
+.sign_up_page form h1 {
+    display: none;
+    text-align: center;
+    font-size: 22px;
+    margin: 2.5rem 0;
+}
+
+.sign_up_page form .input-fields {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sign_up_page form .input-fields label {
+    position: absolute;
+    left: -1000px;
+}
+
+.sign_up_page form .input-fields input {
+    width: 100%;
+    margin-top: 0.25rem;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 0.75rem 0.5rem;
+}
+
+.sign_up_page form button {
+    margin: 2.5rem auto;
+    width: 100%;
+}
+
+.phoneFormat {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-color);
+}
